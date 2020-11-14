@@ -121,19 +121,16 @@ class MHI:
         while True:
           try:
             finish, valor = self.finishTrade(id)
-            print( finish, valor )
           except:
             finish = True
             valor = 0
 
           if finish:
             print('Operaçao Finalizada')
-            print(f"Valor: {valor}")
             
             valor = valor if valor > 0 else float(-1*abs(self.config['valor_entrada']))
             lucro += round(valor, 2)
 
-            print(f"Lucro: {lucro}")
             self.config['valor_entrada'] = self.Martingale( self.config['valor_entrada'], payout )
             
             self.stop(lucro)
